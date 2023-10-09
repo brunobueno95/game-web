@@ -7,20 +7,20 @@ function App() {
     <>
       <Grid
         templateAreas={{
-          base:`"nav" "main"`,
-          lg:`"nav nav"
+          base: `"nav" "main"`,
+          lg: `"nav nav"
           "aside main"  `,
         }}
       >
         <GridItem area="nav">
-        <Navbar/>
+          <Navbar />
         </GridItem>
         <Show above="lg">
-        <GridItem area="aside" >
-          Aside
-        </GridItem></Show>
-        <GridItem area="main" >
-        <GameGrid/>
+          <GridItem area="aside">Aside</GridItem>
+        </Show>
+        <GridItem area="main">
+          {/* {JSON.stringify(import.meta.env)} */}
+           <GameGrid/> 
         </GridItem>
       </Grid>
     </>
