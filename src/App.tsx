@@ -7,12 +7,15 @@ import { Genre } from "./hooks/useGenres";
 import PlataformSelector from "./components/PlataformSelector";
 import { Platform } from "./hooks/useGames";
 
+export interface GameQuery{
+  genre: Genre | null,
+  platform: Platform | null
+}
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
-   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null)
+  // const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
+  //  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null)
+  const[gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery)
   return (
     <>
       <Grid
@@ -31,12 +34,12 @@ function App() {
           <Navbar />
         </GridItem>
         <Show above="lg">
-          <GridItem area="aside" paddingLeft={'5px'} ><GenreList selectedGenre={selectedGenre} onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/></GridItem>
+          <GridItem area="aside" paddingLeft={'5px'} ><GenreList selectedGenre={gameQuery.genre} onSelectGenre={(genre: Genre) => setGameQuery({...gameQuery, genre})}/></GridItem>
         </Show>
         <GridItem  px={10} paddingBottom={10} area="main">
-          <PlataformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)} />
+          <PlataformSelector selectedPlatform={gameQuery.platform} onSelectPlatform={(platform) => setGameQuery({...gameQuery, platform})} />
           {/* {JSON.stringify(import.meta.env)} */}
-           <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/> 
+           <GameGrid gameQuery={gameQuery}/> 
         </GridItem>
       </Grid>
     </>
