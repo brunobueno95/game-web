@@ -4,6 +4,7 @@ import GameGrid from "./components/GameGrid";
 import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
+import PlataformSelector from "./components/PlataformSelector";
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +29,8 @@ function App() {
         <Show above="lg">
           <GridItem area="aside" paddingLeft={'5px'} ><GenreList selectedGenre={selectedGenre} onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/></GridItem>
         </Show>
-        <GridItem area="main">
+        <GridItem  px={10} paddingBottom={10} area="main">
+          <PlataformSelector/>
           {/* {JSON.stringify(import.meta.env)} */}
            <GameGrid selectedGenre={selectedGenre}/> 
         </GridItem>
