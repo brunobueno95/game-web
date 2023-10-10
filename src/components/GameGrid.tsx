@@ -6,10 +6,13 @@ import GameCardContainer from "./gameCard/GameCardContainer";
 
 import { GameQuery } from "../App";
 
+
+
 interface Props {
   gameQuery: GameQuery;
+  gameIDclickFunction : (id:number) => void;
 }
-const GameGrid = ({ gameQuery }: Props) => {
+const GameGrid = ({ gameQuery, gameIDclickFunction }: Props) => {
   const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
   if (error) return <Text>{error}</Text>;
@@ -23,7 +26,7 @@ const GameGrid = ({ gameQuery }: Props) => {
         data.length > 0 &&
         data.map((g) => (
           <GameCardContainer key={g.id}>
-            <GameCard game={g} />
+            <GameCard gameIDclickFunction={ gameIDclickFunction} game={g} />
           </GameCardContainer>
         ))}
       {isLoading &&

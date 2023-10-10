@@ -1,36 +1,62 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-import { AxiosRequestConfig, CanceledError } from "axios";
-
-
+import { AxiosError, AxiosRequestConfig } from "axios";
 
 interface FetchResponse<T> {
   count: number;
   results: T[];
 }
 
-const useData = <T>(endpoint:string, requestConfig?: AxiosRequestConfig, deps?: unknown[]) => {
+const useData = <T>(
+  endpoint: string,
+  requestConfig?: AxiosRequestConfig,
+  deps?: unknown[]
+) => {
   const [data, setData] = useState<T[]>([]);
+
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    apiClient
-      .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
-      .then((res) => {
-        setData(res.data.results);
-        setLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setLoading(false);
-      });
+  useEffect(
+    () => {
+      let mounted = true; // Add a mounted flag
 
-    return () => controller.abort();
-  },deps ? [...deps] : []);
+      const fetchData = async () => {
+        setLoading(true);
+        try {
+          const response = await apiClient.get<FetchResponse<T>>(endpoint, {
+            ...requestConfig,
+          });
+          if (mounted) {
+            let responseData;
+      if (Array.isArray(response.data.results)) {
+        responseData = response.data.results as T[];
+      } else {
+        responseData = [response.data as T];
+      } console.log('API response data:', responseData);
+      setData(responseData);
+            setLoading(false);
+          }
+        } catch (err) {
+          if (mounted) {
+            if (err && (err as AxiosError).message) {
+                setError((err as AxiosError).message);
+              } else {
+                setError('An error occurred.');
+              }
+            setLoading(false);
+          }
+        }
+      };
+
+      fetchData();
+
+      return () => {
+        mounted = false; // Set mounted to false on component unmount
+      };
+    },
+    deps ? [...deps] : []
+  );
 
   return { data, error, isLoading };
 };

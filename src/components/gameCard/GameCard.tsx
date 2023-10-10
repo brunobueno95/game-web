@@ -7,11 +7,15 @@ import getCroppedImageUrl from "../../services/image-url";
 
 interface Props {
   game: Game;
+  gameIDclickFunction : (id:number) => void;
 }
 
-const GameCard = ({ game }: Props) => {
+const GameCard = ({ game, gameIDclickFunction }: Props) => {
+  const handleCardClick = () => {
+    gameIDclickFunction(game.id);
+  };
   return (
-    <Card height={"100%"} paddingBottom={5}>
+    <Card onClick={handleCardClick}  height={"100%"} paddingBottom={5}>
       <Image height={"70%"} src={getCroppedImageUrl(game.background_image)} />
       <CardBody px={5} py={3} height={"30%"}>
       <HStack justifyContent={"space-between"} >
