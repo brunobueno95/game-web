@@ -5,10 +5,14 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlataformSelector from "./components/PlataformSelector";
+import { Platform } from "./hooks/useGames";
+
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null)
+   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null)
   return (
     <>
       <Grid
@@ -30,9 +34,9 @@ function App() {
           <GridItem area="aside" paddingLeft={'5px'} ><GenreList selectedGenre={selectedGenre} onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/></GridItem>
         </Show>
         <GridItem  px={10} paddingBottom={10} area="main">
-          <PlataformSelector/>
+          <PlataformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)} />
           {/* {JSON.stringify(import.meta.env)} */}
-           <GameGrid selectedGenre={selectedGenre}/> 
+           <GameGrid selectedPlatform={selectedPlatform} selectedGenre={selectedGenre}/> 
         </GridItem>
       </Grid>
     </>
