@@ -1,6 +1,6 @@
 import { Box, HStack, Image, useColorModeValue } from "@chakra-ui/react";
 import logoDark from "../../assets/flipperNobg.png";
-import logoLight from "../../assets/flipper.webp";
+import logoLight from "../../assets/Logo-Light.png";
 
 import ColorModeSwitch from "../ColorModeSwitch";
 import SearchInput from "../SearchInput";
