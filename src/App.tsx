@@ -26,7 +26,7 @@ function App() {
           <Navbar />
         </GridItem>
         <Show above="lg">
-          <GridItem area="aside" paddingLeft={'5px'} ><GenreList onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/></GridItem>
+          <GridItem area="aside" paddingLeft={'5px'} ><GenreList selectedGenre={selectedGenre} onSelectGenre={(genre: Genre) => setSelectedGenre(genre)}/></GridItem>
         </Show>
         <GridItem area="main">
           {/* {JSON.stringify(import.meta.env)} */}
