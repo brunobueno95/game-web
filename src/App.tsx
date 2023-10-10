@@ -12,12 +12,17 @@ function App() {
           lg: `"nav nav"
           "aside main"  `,
         }}
+        templateColumns={{
+          base:'1fr',
+          lg:'200px 1fr',
+
+        }}
       >
         <GridItem area="nav">
           <Navbar />
         </GridItem>
         <Show above="lg">
-          <GridItem area="aside"><GenreList/></GridItem>
+          <GridItem area="aside" paddingLeft={'5px'} ><GenreList/></GridItem>
         </Show>
         <GridItem area="main">
           {/* {JSON.stringify(import.meta.env)} */}
