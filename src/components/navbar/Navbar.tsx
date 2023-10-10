@@ -5,7 +5,11 @@ import logoLight from "../../assets/flipper.webp";
 import ColorModeSwitch from "../ColorModeSwitch";
 import SearchInput from "../SearchInput";
 
-const Navbar = () => {
+interface Props{
+  onSearch : (searchText: string) => void;
+}
+
+const Navbar = ({onSearch} : Props) => {
   const logoSrc = useColorModeValue(logoLight, logoDark);
   return (
     <HStack px={"20px"}>
@@ -20,7 +24,7 @@ const Navbar = () => {
           
         />
       </Box>
-      <SearchInput />
+      <SearchInput onSearch={onSearch} />
       <ColorModeSwitch />
     </HStack>
   );
