@@ -19,7 +19,7 @@ const useData = <T>(
 
   useEffect(
     () => {
-      let mounted = true; // Add a mounted flag
+      let mounted = true; 
 
       const fetchData = async () => {
         setLoading(true);
@@ -55,6 +55,7 @@ const useData = <T>(
         mounted = false; // Set mounted to false on component unmount
       };
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     deps ? [...deps] : []
   );
 

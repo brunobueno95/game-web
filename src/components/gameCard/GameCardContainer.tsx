@@ -7,6 +7,7 @@ interface Props {
 
 const GameCardContainer = ({children}:Props) => {
   const boxShadow = useColorModeValue('0px 1px 5px #151515','0px 1px 5px #d1cecedc')
+  const boxShadowHover = useColorModeValue('0px 1px 10px #151515','0px 1px 10px #d1cecedc')
   return (
     <Box 
     cursor={'pointer'}
@@ -14,6 +15,10 @@ const GameCardContainer = ({children}:Props) => {
     borderRadius={10}
     overflow={"hidden"}
    height={"350px"}
+   _hover={{
+    transform: 'scale(1.05)',
+    boxShadow: boxShadowHover,
+  }}
     width={"100%"}>
       {children}
     </Box>

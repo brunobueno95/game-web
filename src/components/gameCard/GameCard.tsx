@@ -15,7 +15,7 @@ const GameCard = ({ game, gameIDclickFunction }: Props) => {
     gameIDclickFunction(game.id);
   };
   return (
-    <Card onClick={handleCardClick}  height={"100%"} paddingBottom={5}>
+    <Card onClick={handleCardClick}    height={"100%"} paddingBottom={5}>
       <Image height={"70%"} src={getCroppedImageUrl(game.background_image)} />
       <CardBody px={5} py={3} height={"30%"}>
       <HStack justifyContent={"space-between"} >
