@@ -6,16 +6,14 @@ import GameCardContainer from "./gameCard/GameCardContainer";
 
 import { GameQuery } from "../App";
 
-
-
 interface Props {
   gameQuery: GameQuery;
-  gameIDclickFunction : (id:number) => void;
+  gameIDclickFunction: (id: number) => void;
 }
 const GameGrid = ({ gameQuery, gameIDclickFunction }: Props) => {
   const { data, error, isLoading } = useGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6];
-  if (error) return <Text>{error}</Text>;
+  if (error) return <Text>{error.message}</Text>;
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
@@ -23,10 +21,10 @@ const GameGrid = ({ gameQuery, gameIDclickFunction }: Props) => {
       marginTop={25}
     >
       {data &&
-        data.length > 0 &&
-        data.map((g) => (
+        data.results.length > 0 &&
+        data.results.map((g) => (
           <GameCardContainer key={g.id}>
-            <GameCard gameIDclickFunction={ gameIDclickFunction} game={g} />
+            <GameCard gameIDclickFunction={gameIDclickFunction} game={g} />
           </GameCardContainer>
         ))}
       {isLoading &&

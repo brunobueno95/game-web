@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
   Menu,
   MenuButton,
@@ -36,9 +36,12 @@ const PlataformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
       </MenuButton>
       <MenuList>
         <MenuItem onClick={handleAllMenuItemClick}>All</MenuItem>
-        {data.map((platform) => (
+        {data?.results.map((platform) => (
           <MenuItem
-            onClick={() =>{setIsAll(false); onSelectPlatform(platform)}}
+            onClick={() => {
+              setIsAll(false);
+              onSelectPlatform(platform);
+            }}
             key={platform.id}
           >
             {platform.name}
