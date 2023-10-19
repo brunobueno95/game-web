@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient from "../services/api-client";
-
+import APIClient from "../services/api-client";
 
 interface GameIndividual {
   id: number;
@@ -10,10 +9,11 @@ interface GameIndividual {
   website: string;
 }
 
-const useIndividualGame = (id: number) =>
-  useQuery({
+const useIndividualGame = (id: number) => {
+  const apiClient = new APIClient<GameIndividual>(`/games/${id}`);
+ return  useQuery({
     queryKey: ["individualGame"],
-    queryFn: () => apiClient.get<GameIndividual>(`games/${id}`),
+    queryFn: apiClient.getOne,
   });
-
+};
 export default useIndividualGame;

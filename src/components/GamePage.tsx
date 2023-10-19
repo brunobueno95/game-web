@@ -25,7 +25,7 @@ const GamePage = ({ gameId, openClosePage }: Props) => {
   if (error) return <div>Error: {error.message}</div>;
   if (!data) return null;
 
-  if (data.data)
+  if (data)
     return (
       <>
         <Button
@@ -45,13 +45,13 @@ const GamePage = ({ gameId, openClosePage }: Props) => {
           paddingBottom={20}
         >
           <Heading fontSize={"5xl"} my={20}>
-            {data.data.name}
+            {data.name}
           </Heading>
           <Image
             borderRadius={"10px"}
             width={{ base: "100%", md: "500px" }}
             height={"auto"}
-            src={getCroppedImageUrl(data.data.background_image)}
+            src={getCroppedImageUrl(data.background_image)}
           />
 
           <Box
@@ -63,14 +63,11 @@ const GamePage = ({ gameId, openClosePage }: Props) => {
             marginTop={10}
           >
             {" "}
-            <Text fontSize={"2xl"}>
-              {" "}
-              {removeHtmlTags(data.data.description)}
-            </Text>
+            <Text fontSize={"2xl"}> {removeHtmlTags(data.description)}</Text>
             <HStack marginTop={4}>
               <Text fontSize={"xl"}>Website: </Text>
               <Button color={"#16BCE6"} variant={"link"} fontSize={"lg"}>
-                {data.data.website}
+                {data.website}
               </Button>
             </HStack>
           </Box>
