@@ -1,4 +1,4 @@
-import { Text, SimpleGrid } from "@chakra-ui/react";
+import { Text, SimpleGrid, Spinner } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./gameCard/GameCard";
 import GameCardSkeleton from "./gameCard/GameCardSkeleton";
@@ -68,9 +68,24 @@ const GameGrid = ({ gameQuery, gameIDclickFunction }: Props) => {
             </GameCardContainer>
           ))}
       </SimpleGrid>
-      {/* {hasNextPage && (
-        <Button onClick={()=>fetchNextPage()}>{isFetchingNextPage ? "Loading..." : "Load More"}</Button>
-      )} */}
+      {isFetchingNextPage && (
+        <div
+          style={{
+            display: "flex",
+            height: "400px",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner
+            size="xl"
+            thickness="6px"
+            emptyColor="gray.200"
+            color="#CD10B8"
+          />
+        </div>
+      )}
     </>
   );
 };
